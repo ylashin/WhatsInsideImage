@@ -49,9 +49,6 @@
       "web.config",
       "predictor.sh"
     ]
-  },
-
-  "scripts": {
-    "postpublish": [ "dotnet publish --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
+  
 }
