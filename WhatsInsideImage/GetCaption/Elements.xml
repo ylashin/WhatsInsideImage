@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction Id="1e9776ce-b169-49bf-9946-405d16e5ad24.GetCaption"
+                RegistrationType="List"
+                RegistrationId="109"
+                Location="CommandUI.Ribbon"
+                Sequence="10001"
+                Title="What's inside this image ?"
+                HostWebDialog="true"
+                HostWebDialogHeight="600"
+                HostWebDialogWidth="900">
+    <CommandUIExtension>
+      <!-- 
+      Update the UI definitions below with the controls and the command actions
+      that you want to enable for the custom action.
+      -->
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.Documents.Manage.Controls._children">
+          <Button Id="Ribbon.Documents.Manage.GetCaptionButton"
+                  Alt="Get Caption"
+                  Sequence="100"
+                  Command="Invoke_GetCaptionButtonRequest"
+                  LabelText="Get Caption"
+                  TemplateAlias="o1"
+                  Image32by32="_layouts/15/images/placeholder32x32.png"
+                  Image16by16="_layouts/15/images/placeholder16x16.png" />
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler Command="Invoke_GetCaptionButtonRequest"
+                          CommandAction="~appWebUrl/Pages/Default.aspx?{StandardTokens}&amp;SPListItemId={SelectedItemId}&amp;SPListId={SelectedListId}"/>
+      </CommandUIHandlers>
+    </CommandUIExtension >
+  </CustomAction>
+</Elements>

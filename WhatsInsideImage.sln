@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsInsideImage", "WhatsInsideImage\WhatsInsideImage.csproj", "{F54674D3-050B-4F1C-A28B-5775DEDCA68D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WhatsInsideImageApi", "WhatsInsideImageApi\WhatsInsideImageApi.xproj", "{0E44AD45-251D-4D39-9372-E0D9B0A60407}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F54674D3-050B-4F1C-A28B-5775DEDCA68D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0E44AD45-251D-4D39-9372-E0D9B0A60407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E44AD45-251D-4D39-9372-E0D9B0A60407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E44AD45-251D-4D39-9372-E0D9B0A60407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E44AD45-251D-4D39-9372-E0D9B0A60407}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

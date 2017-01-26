@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="f56e3e16-6d43-40c2-9ae5-cbd3cd6252fe" 
+        solutionId="f56e3e16-6d43-40c2-9ae5-cbd3cd6252fe" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="WhatsInsideImage"
+        sharePointProductVersion="16.0">
+  <features>
+        <featureReference itemId="5e4f9f6e-e79b-47fa-8f89-7c027580a392" />
+  </features>
+</package>
