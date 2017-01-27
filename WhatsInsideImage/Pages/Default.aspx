@@ -19,17 +19,7 @@
     <!-- Add your CSS styles to the following file -->
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-
+   
     <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="../Scripts/App.js"></script>
 </asp:Content>
@@ -43,13 +33,15 @@
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <WebPartPages:AllowFraming ID="AllowFraming" runat="server" />
     <div id="addin-main-contents">
+    </div>    
+    <div id="describe-actions" style="display: none">
+        <input type="button" id="btnDescribe" value="Describe Image" />        
     </div>
     <div id="selections-section" style="display: none">
         <label>Select Description : </label> <select id="descriptions"></select>
     </div>
-    <div id="describe-actions" style="display: none">
-        <input class="btn btn-default" type="button" id="btnDescribe" value="Describe Image" />
-        <input class="btn btn-default" type="button" id="btnApply" value="Apply Description" />
-    </div>
+
+    <input type="button" id="btnApply" value="Apply Description" style="display: none" />
+
 
 </asp:Content>

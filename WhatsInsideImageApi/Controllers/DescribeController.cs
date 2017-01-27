@@ -50,7 +50,7 @@ namespace WhatsInsideImageApi.Controllers
                 RedirectStandardOutput = true
             };
 
-            var process = Process.Start(processInfo);   
+            var process = Process.Start(processInfo);
             process.WaitForExit();
             var output = process.StandardOutput.ReadToEnd();
 
@@ -63,18 +63,21 @@ namespace WhatsInsideImageApi.Controllers
               2) a group of people sitting around a table with a cake . (p=0.000799)
 
             */
+
             if (output.Contains("Captions for image"))
             {
+                output = output.Substring(output.IndexOf("Captions for image"));
                 var lines = output
                     .Split(Environment.NewLine[0])
                     .Skip(1)
                     .Select(a => a.Trim())
+                    .Where(a => a.Length > 3 && a.Contains("(p="))
                     .Select(a => a.Substring(3))
-                    .Select(a => a.Substring(0, a.IndexOf("(p", StringComparison.OrdinalIgnoreCase)).Trim());
+                    .Select(a => a.Substring(0, a.IndexOf("(p=", StringComparison.OrdinalIgnoreCase)).Trim())
+                    .ToArray();
                 return Ok(lines);
             }
-            return BadRequest("Cannot predict image description" + Environment.NewLine +
-                output);
+            return BadRequest("Cannot predict image description" + Environment.NewLine +  output);
         }
 
         private void WriteFile(IFormFile file, string targetFileName)

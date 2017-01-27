@@ -3,25 +3,27 @@
 (function () {
     var appUrl;
     var hostUrl;
-    var listItemIds;
+    var listItemId;
     var listId;
 
     var rawImageContents;
     var fileName;
 
-    $(function () {
-        //1loadScripts();
+    $(function () {        
         appUrl = GetUrlKeyValue("SPAppWebUrl");
         hostUrl = GetUrlKeyValue("SPHostUrl");
-        listItemIds = GetUrlKeyValue("SPListItemId");
+        var listItemIds = GetUrlKeyValue("SPListItemId");
         listId = GetUrlKeyValue("SPListId");
 
         listId = listId.replace("{", "").replace("}", "");
 
         if (!listItemIds) {
-            listItemIds = "1";// "Addin is installed. Please use it from the ribbon of a picture library!";
-            listId = "DCACEC82-6E8A-4758-9B3E-BC33F9951CC0";
+            return;
         }
+
+        listItemId = listItemIds.split(",")[0]; // I will just work with first image for now
+        // multiple images not supported
+
         initializePage();
 
     });
@@ -37,7 +39,7 @@
         
         var url = String.format("{0}/_api/SP.AppContextSite(@target)/" +
             "Web/Lists(guid'{2}')/Items({3})/File/?@target='{1}'",
-            appUrl, hostUrl, listId, listItemIds);
+            appUrl, hostUrl, listId, listItemId);
 
         jQuery.ajax({
             url: url,
@@ -55,7 +57,7 @@
     function loadBinaryContents() {
         var url = String.format("{0}/_api/SP.AppContextSite(@target)/" +
             "Web/Lists(guid'{2}')/Items({3})/File/$value?@target='{1}'",
-            appUrl, hostUrl, listId, listItemIds);
+            appUrl, hostUrl, listId, listItemId);
         var oReq = new XMLHttpRequest();
         oReq.open("GET", url, true);
         oReq.responseType = "arraybuffer";
@@ -74,10 +76,7 @@
 
             $("#btnDescribe").click(function () {
                 describeImage();
-            });
-            $("#btnApply").click(function () {
-                applyDescription();
-            });
+            });            
         };
 
         oReq.send();
@@ -89,7 +88,7 @@
         var blob = new Blob([rawImageContents], { type: "image/jpeg" });
         formData.append("file.jpg", blob, "file.jpg");
         jQuery.ajax({
-            url: "http://192.168.1.6:5001/api/describe",
+            url: "http://localhost:5001/api/describe",
             data: formData,
             cache: false,
             contentType: false,
@@ -102,30 +101,43 @@
                 }
                 $("#descriptions").append(options);
                 $("#selections-section").show();
+                $("#btnApply").show();
+
+                $("#btnApply").click(function () {
+                    applyDescription();
+                });
             }
         });
     }
 
-    function applyDescription() {
-        console.log($("#descriptions").val());
+    function applyDescription() {        
 
-        /*
-         url: http://site url/_api/web/lists/GetByTitle(‘Test')/items(item id)
-method: POST
-body: { '__metadata': { 'type': 'SP.Data.TestListItem' }, 'Title': 'TestUpdated'}
-headers:
-    Authorization: "Bearer " + accessToken
-     X-RequestDigest: form digest value
-    "IF-MATCH": etag or "*"
-    "X-HTTP-Method":"MERGE",
-    accept: "application/json;odata=verbose"
-    content-type: "application/json;odata=verbose"
-    content-length:length of post body
-         */
-    }
+        var url = String.format("{0}/_api/SP.AppContextSite(@target)/" +
+            "Web/Lists(guid'{2}')/Items({3})/?@target='{1}'",
+            appUrl, hostUrl, listId, listItemId);
 
-
-    
+        var body = JSON.stringify({ '__metadata': { 'type': 'SP.Data.My_x0020_PicturesItem' }, 'Caption': $("#descriptions").val() });
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: body,
+            headers: {
+                "Accept": "application/json; odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
+                "X-HTTP-Method":"MERGE",                
+                "content-type": "application/json;odata=verbose"
+            },
+            success: function (result) {
+                alert("Image description has been updated");
+            },
+            error: function(error)
+            {
+                console.error(error);
+                alert("Error happened while saving image description");
+            }
+        });       
+    }   
     
 
 })();
