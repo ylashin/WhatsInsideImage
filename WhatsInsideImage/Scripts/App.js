@@ -83,10 +83,16 @@
         $("#s4-ribbonrow").hide();
     }
 
+
+
     function describeImage() {
         var formData = new FormData();
-        var blob = new Blob([rawImageContents], { type: "image/jpeg" });
-        formData.append("file.jpg", blob, "file.jpg");
+
+        var re = /(?:\.([^.]+))?$/;
+        var ext = re.exec(fileName)[1];
+        var blob = new Blob([rawImageContents], { type: "image/" + ext }); // simplistic
+        var newFileName = (Math.random() * 10000000).toFixed().toString() + "." + ext;
+        formData.append(newFileName, blob, newFileName);
         jQuery.ajax({
             url: "http://localhost:5001/api/describe",
             data: formData,
